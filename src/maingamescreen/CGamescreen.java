@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -14,68 +15,99 @@ import javafx.stage.Stage;
 public class CGamescreen {
 
     private MGamescreen model;
-
-    @FXML
+    private Gamemode zwisch;
     public Button ans1;
-    @FXML
     public Button ans2;
-    @FXML
     public Button ans3;
-    @FXML
     public Button ans4;
 
-    @FXML
-    public TextField tfrechnung;
-    @FXML
+
+    public Label lbrechnung;
     public ProgressBar pbtimeleft;
-    @FXML
-    public TextField tfscore;
+    public Label lbscore;
 
-
-    public static void show(Stage stage){
+    //start
+    public static void show(Stage stage, Gamemode mode){
         try {
+
+            //standard javafx
             FXMLLoader loader = new FXMLLoader(CGamescreen.class.getResource("VGamescreen.fxml"));
+            //Modell erstellen und Gamemode auswählen
             Parent parent = loader.load();
 
-
-            Scene scene = new Scene(parent, 400, 500);
+            Scene scene = new Scene(parent);
             stage.setScene(scene);
             stage.setTitle("Mathability");
             stage.show();
 
+
+            CGamescreen cGamescreen = loader.getController();
+            cGamescreen.model = new MGamescreen(mode);
+            cGamescreen.last();
+            cGamescreen.showRechnung();
         }catch (Exception ex){
             ex.printStackTrace();
         }
 
-    }
+    }//show
 
 
     @FXML
     public void initialize(){
-        model = new MGamescreen(Gamemode.ADD);
-        //Rechnung erzeugen und dem Bemutzer anzeigen
-        showRechnung();
+
     }
 
-    private void showRechnung(){
-        model.getnewRechung();
+   private void last(){
+       pbtimeleft.progressProperty().bind(model.timeleftProperty());
+   }
 
-        tfrechnung.setText(model.getGameInfos()[0]);
+    private void showRechnung(){
+        model.getnewRechung();//neue Rechnung erzeugen
+        lbscore.setText( model.getScore()+" pt");//Score aktuellisieren
+
+        lbrechnung.setText(model.getGameInfos()[0]); //Rechnung
+        //4 Antwortmöglichkeiten
         ans1.setText(model.getGameInfos()[1]);
         ans2.setText(model.getGameInfos()[2]);
         ans3.setText(model.getGameInfos()[3]);
         ans4.setText(model.getGameInfos()[4]);
 
-    }
+        model.resetTimer();
+    }//showrechnung
 
+
+    //überprüfen ob das Ergebnis richtig ist
     private void checkans(String answer){
-        System.out.println("Gewählte Antwort:" +answer);
-        //Überprüfung ob die Richtige Option gewäht wurde
-    }
+        System.out.print("Gewählte Antwort:" +answer);
 
+        //Überprüfung ob die Richtige Option gewäht wurde
+        if(Integer.parseInt(answer) ==model.getRightans()){
+            //Richtig
+
+            System.out.println("  Und richtig gelöst");
+            model.setScore(model.getScore()+1);
+
+        }else {
+           //versuch stoppen
+
+            System.out.println(" Und falsch gelöst ");
+
+        }
+
+    }//checkans
+
+
+    //Beim Knopfdruck
     public void btoptionpressed(ActionEvent actionEvent) {
-        String choosenans =((Button)actionEvent.getSource()).getId();
+        model.resetTimer();
+        String choosenans =((Button)actionEvent.getSource()).getText();
 
         checkans(choosenans);
-    }
+
+        //Nächste Rechnung
+        showRechnung();
+    }//btoptionpressed
+
+
+
 }

@@ -1,8 +1,10 @@
 package main;
 
+import helper.Gamemode;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import maingamescreen.CGamescreen;
+import titlescreen.CTitlescreen;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -12,6 +14,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        CGamescreen.show(primaryStage);
-    }ä
+     CTitlescreen.show(primaryStage);
+    }
 }
