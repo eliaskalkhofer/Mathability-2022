@@ -123,8 +123,6 @@ public class MGamescreen {
     //erzeugen einer neuen Rechnung anhand des Spielmodus
     public void getnewRechung(){
 
-
-
         switch (current){
             case ADD :
                 gameInfos=  getADD();
@@ -163,12 +161,7 @@ public class MGamescreen {
                 gameInfos=null;
                 break;
         }
-
-
-
     }
-
-
 
    //Adition
     private String[] getADD(){

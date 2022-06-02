@@ -27,7 +27,7 @@ public class CGamescreen {
     public Label lbscore;
 
     //start
-    public static void show(Stage stage, Gamemode mode){
+    public static void show(Stage stage, Gamemode mode) {
         try {
 
             //standard javafx
@@ -107,7 +107,4 @@ public class CGamescreen {
         //Nächste Rechnung
         showRechnung();
     }//btoptionpressed
-
-
-
 }
