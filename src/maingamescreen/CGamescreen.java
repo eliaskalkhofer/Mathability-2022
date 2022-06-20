@@ -97,6 +97,7 @@ public class CGamescreen {
            //versuch stoppen
 
             System.out.println(" Und falsch gelöst ");
+            model.stopTimer();
             end("Falsche Antwort");
 
         }
@@ -114,6 +115,7 @@ public class CGamescreen {
         //Nächste Rechnung
         showRechnung();
     }//btoptionpressed
+
 
     private void end(String msg){
         CScore.show(stage,model.getScore(),model.getId()+"");

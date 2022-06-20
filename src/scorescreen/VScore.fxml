@@ -12,7 +12,11 @@
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="scorescreen.CScore">
     <padding><Insets bottom="10" left="25" right="25" top="25"/> </padding>
+
+
+
     <Text fx:id="txName" text="Name: Fetter Hund"/>
     <Text fx:id="txScore" text="Score: 10"/>
+    <Button onAction="#exitOnAction" text="Zurück"/>
 
 </VBox>

@@ -39,7 +39,7 @@ public class MGamescreen {
 
 
             if(timepassed>ANSWERTIME){
-                //Versuch stoppen
+                stopTimer();
             }
         }
 
@@ -70,7 +70,7 @@ public class MGamescreen {
         setCurrent(mode);
         setScore(0);
         gametimer = new Timer();
-        start();
+        startTimer();
         setId("001");
     }
 
@@ -117,9 +117,10 @@ public class MGamescreen {
 
 
 
-    public void start(){
+    public void startTimer(){
         gametimer.schedule(task, PROGRESSBARUPDATE,10);
     }
+    public void stopTimer(){ gametimer.purge();}
 
     //erzeugen einer neuen Rechnung anhand des Spielmodus
     public void getnewRechung(){

@@ -22,5 +22,5 @@
         <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Multilpizieren" fx:id="MUL" />
         <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Division"  fx:id="DIV"/>
     </HBox>
-    <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="460.0" text="MIX" />
+    <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="460.0" text="MIX" fx:id="MIX"/>
 </VBox>

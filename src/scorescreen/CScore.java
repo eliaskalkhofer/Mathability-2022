@@ -1,13 +1,17 @@
 package scorescreen;
 
+import helper.Gamemode;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import maingamescreen.CGamescreen;
 import maingamescreen.MGamescreen;
+import titlescreen.CTitlescreen;
 
 public class CScore {
     public Text txName;
@@ -30,6 +34,7 @@ public class CScore {
 
             CScore cGamescreen = loader.getController();
             cGamescreen.model = new MScore(id,score);
+            cGamescreen.loadmodel();
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -39,10 +44,15 @@ public class CScore {
 
     }
 
-    @FXML
-    public void initialize(){
-        
+
+    public void loadmodel(){
+        txName.setText("Benutzer: "+model.getName());
+        txScore.setText("Score: "+model.getScore()+" Punkte");
         
     }
 
+    public void exitOnAction(ActionEvent actionEvent) {
+
+        CTitlescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow());
+    }
 }

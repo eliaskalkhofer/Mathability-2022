@@ -15,7 +15,7 @@ import java.io.IOException;
 
 public class CTitlescreen {
 
-    public static void show(Stage stage) throws IOException {
+    public static void show(Stage stage) {
         try {
             //standard javafx
         FXMLLoader loader = new FXMLLoader(CTitlescreen.class.getResource("VTitlescreen.fxml"));
