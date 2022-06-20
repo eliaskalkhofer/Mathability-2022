@@ -4,6 +4,7 @@ import helper.Gamemode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,11 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import scorescreen.CScore;
 
 public class CGamescreen {
 
     private MGamescreen model;
     private Gamemode zwisch;
+    private Stage stage;
+
     public Button ans1;
     public Button ans2;
     public Button ans3;
@@ -25,6 +29,7 @@ public class CGamescreen {
     public Label lbrechnung;
     public ProgressBar pbtimeleft;
     public Label lbscore;
+
 
     //start
     public static void show(Stage stage, Gamemode mode) {
@@ -43,6 +48,7 @@ public class CGamescreen {
 
             CGamescreen cGamescreen = loader.getController();
             cGamescreen.model = new MGamescreen(mode);
+            cGamescreen.stage = stage;
             cGamescreen.last();
             cGamescreen.showRechnung();
         }catch (Exception ex){
@@ -91,6 +97,7 @@ public class CGamescreen {
            //versuch stoppen
 
             System.out.println(" Und falsch gelöst ");
+            end("Falsche Antwort");
 
         }
 
@@ -107,4 +114,8 @@ public class CGamescreen {
         //Nächste Rechnung
         showRechnung();
     }//btoptionpressed
+
+    private void end(String msg){
+        CScore.show(stage,model.getScore(),model.getId()+"");
+    }
 }

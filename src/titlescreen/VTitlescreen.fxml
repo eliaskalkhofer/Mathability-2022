@@ -15,12 +15,12 @@
          <Font size="25.0" />
       </font></Label>
     <HBox prefHeight="120.0" prefWidth="453.0" spacing="10">
-        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Addieren" />
-        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Subtrahieren" />
+        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Addieren" fx:id="ADD" />
+        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Subtrahieren"  fx:id="SUB"/>
     </HBox>
     <HBox prefHeight="120.0" prefWidth="455.0" spacing="10">
-        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Multilpizieren" />
-        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Division" />
+        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Multilpizieren" fx:id="MUL" />
+        <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="225.0" text="Division"  fx:id="DIV"/>
     </HBox>
     <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="460.0" text="MIX" />
 </VBox>

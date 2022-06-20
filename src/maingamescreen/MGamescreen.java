@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 public class MGamescreen {
     private Gamemode current;   //Welchen Gamemode man spielen möchte
-    private int id;             //Welche Id dieses Spiel hat
+    private String id;             //Welche Id dieses Spiel hat
     private int score;          //Welchen Score dieses Spiel erreicht hat
 
     private String[] gameInfos;
@@ -71,6 +71,7 @@ public class MGamescreen {
         setScore(0);
         gametimer = new Timer();
         start();
+        setId("001");
     }
 
     //Getter und Setter
@@ -82,11 +83,11 @@ public class MGamescreen {
         this.current = current;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String  id) {
         this.id = id;
     }
 

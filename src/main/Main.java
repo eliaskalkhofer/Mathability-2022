@@ -16,4 +16,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
      CTitlescreen.show(primaryStage);
     }
+
+    public void stop(){
+        System.exit(1);
+
+    }
 }

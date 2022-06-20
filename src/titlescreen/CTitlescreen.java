@@ -34,7 +34,7 @@ public class CTitlescreen {
 
     //Auswählen des Gamemodes
     public void btGamemode(ActionEvent actionEvent) {
-      String choosenGamemode = ((Button)actionEvent.getSource()).getText();
+      String choosenGamemode = ((Button)actionEvent.getSource()).getId();
         switch (choosenGamemode){
             case "ADD":
                 //Langer Code um die aktuelle Stage weiterzugeben
