@@ -1,6 +1,7 @@
 package scorescreen;
 
 import helper.Gamemode;
+import helper.Score;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class CScore {
     public Text txScore;
     MScore model;
 
-    public static void show(Stage stage, int score, String id){
+    public static void show(Stage stage, Score score){
         try {
 
             //standard javafx
@@ -33,7 +34,7 @@ public class CScore {
 
 
             CScore cGamescreen = loader.getController();
-            cGamescreen.model = new MScore(id,score);
+            cGamescreen.model = new MScore(score);
             cGamescreen.loadmodel();
         }catch (Exception ex){
             ex.printStackTrace();
@@ -46,8 +47,8 @@ public class CScore {
 
 
     public void loadmodel(){
-        txName.setText("Benutzer: "+model.getName());
-        txScore.setText("Score: "+model.getScore()+" Punkte");
+        txName.setText("Benutzer: "+model.getScore().getName());
+        txScore.setText("Score: "+model.getScore().getAmount()+" Punkte");
         
     }
 

@@ -1,27 +1,19 @@
 package scorescreen;
 
-public class MScore {
-    private String name;
-    private int score;
+import helper.Gamemode;
+import helper.Score;
 
-    public MScore(String name, int score){
-        setName(name);
+public class MScore {
+    private Score score;
+    public MScore(Score score){
         setScore(score);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getScore() {
+    public Score getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Score score) {
         this.score = score;
     }
 }

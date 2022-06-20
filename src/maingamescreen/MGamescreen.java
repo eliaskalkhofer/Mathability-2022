@@ -71,7 +71,7 @@ public class MGamescreen {
         setScore(0);
         gametimer = new Timer();
         startTimer();
-        setId("001");
+        setId("DefaultUser");
     }
 
     //Getter und Setter

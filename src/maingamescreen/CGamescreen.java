@@ -1,6 +1,8 @@
 package maingamescreen;
 
 import helper.Gamemode;
+import helper.Highscores;
+import helper.Score;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -118,6 +120,9 @@ public class CGamescreen {
 
 
     private void end(String msg){
-        CScore.show(stage,model.getScore(),model.getId()+"");
+        Score actscore = new Score(model.getScore(), model.getId(), model.getCurrent());
+        ((Highscores)Highscores.getInstance()).addScore(actscore);
+
+        CScore.show(stage,actscore);
     }
 }

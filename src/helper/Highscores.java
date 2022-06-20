@@ -7,13 +7,13 @@ import java.util.List;
 public class Highscores implements Serializable {
 
     private static Highscores highscores;
-    private static final String FILEPATH = "helper//obj";
+    private static final String FILEPATH = "scores.ser";
 
-    private List<Integer> addHS;
-    private List<Integer> subHS;
-    private List<Integer> mulHS;
-    private List<Integer> divHS;
-    private List<Integer> mixHS;
+    private List<Score> addHS;
+    private List<Score> subHS;
+    private List<Score> mulHS;
+    private List<Score> divHS;
+    private List<Score> mixHS;
 
 
     public static Highscores getInstance(){
@@ -41,18 +41,30 @@ public class Highscores implements Serializable {
 
     }
 
-    private void addScore(Gamemode typ, int score, String name){
-        switch (typ){
+    public void addScore(Score score){
+        switch (score.getType()){
             case ADD:
                 addHS.add(score);
+                break;
+            case MIX:
+                mixHS.add(score);
+                break;
 
-
+            case SUB:
+                subHS.add(score);
+                break;
+            case MUL:
+                mulHS.add(score);
+                break;
+            case DIV:
+                divHS.add(score);
+                break;
 
         }
     }
 
 
-    private void restore() throws IOException, ClassNotFoundException {
+    public void restore() throws IOException, ClassNotFoundException {
         FileInputStream filein = new FileInputStream(FILEPATH);
         ObjectInputStream objectIn = new ObjectInputStream(filein);
         highscores =(Highscores) objectIn.readObject();
@@ -60,7 +72,7 @@ public class Highscores implements Serializable {
         System.out.println("Erfolgreich wiederhergestellt");
 
     }
-    private void store(){
+   public void store(){
         try {
 
             FileOutputStream fileOut = new FileOutputStream(FILEPATH);
@@ -73,4 +85,27 @@ public class Highscores implements Serializable {
             ex.printStackTrace();
         }
     }
+    public List<Score> getList(Gamemode typ){
+        switch (typ){
+            case ADD:
+                return addHS;
+
+            case MIX:
+                return mixHS;
+
+
+            case SUB:
+               return subHS;
+
+            case MUL:
+                return mulHS;
+
+            case DIV:
+                return divHS;
+
+        }
+        return null;
+    }
+
+
 }
