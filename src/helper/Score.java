@@ -11,6 +11,7 @@ public class Score implements Serializable {
 
 
 
+    //Score in welchem SpielID Gamemode Scoreamount und Username gespeichert werden können
     public Score(int amount, String name, Gamemode type){
 
         setAmount(amount);
@@ -51,6 +52,7 @@ public class Score implements Serializable {
     }
 
 
+    //Darstellung für die Highscorelisten
     @Override
     public String toString() {
         return getName()+": "+getAmount();

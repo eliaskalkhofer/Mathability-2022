@@ -15,19 +15,20 @@ public class MGamescreen {
     private String id;             //Welche Id dieses Spiel hat
     private int score;          //Welchen Score dieses Spiel erreicht hat
 
-    private String[] gameInfos;
-    private int rightans;
-    private static int MAX =100;
+    private String[] gameInfos;     //Spielinfos für Controller
+    private int rightans;           //richtige Antwort
+    private static int MAX =100;    //Welche Reichweite haben die Rechungne zb
 
 
+    //Für den Timer
     private static int ANSWERTIME = 10000; //in ms
     private static int PROGRESSBARUPDATE = 10; //in ms
     private  int timepassed=0;
     private DoubleProperty timeleft;
 
 
-    //Zeitproaufgabe
-    private Timer gametimer;    //Gametimer während des Spieles
+    //Gametimer während des Spieles
+    private Timer gametimer;
     TimerTask task = new TimerTask()
     {
         @Override
@@ -45,12 +46,17 @@ public class MGamescreen {
 
     };
 
+    //Timer-Funktionen
     public void resetTimer(){
         timepassed =0;
     }
+    public void startTimer(){
+        gametimer.schedule(task, PROGRESSBARUPDATE,10);
+    }
+    public void stopTimer(){ gametimer.purge();}
 
 
-
+    //Für Binding
     public final DoubleProperty timeleftProperty(){
         if(timeleft==null){
             timeleft = new SimpleDoubleProperty(1);
@@ -58,19 +64,13 @@ public class MGamescreen {
         return timeleft;
     }
 
-    public final double gettimeleft(){
-        if(timepassed==0){
-            return 0;
-        }
-        return timeleft.get();
-    }
-
 
     public MGamescreen(Gamemode mode, String username){
-        setCurrent(mode);
+        setCurrent(mode);//Spielmodus
         setScore(0);
         setId(username);
         gametimer = new Timer();
+        //Timer starten
         startTimer();
 
     }
@@ -118,14 +118,10 @@ public class MGamescreen {
 
 
 
-    public void startTimer(){
-        gametimer.schedule(task, PROGRESSBARUPDATE,10);
-    }
-    public void stopTimer(){ gametimer.purge();}
-
     //erzeugen einer neuen Rechnung anhand des Spielmodus
     public void getnewRechung(){
 
+        //Auswahl von welcher Funktion wird die Gameinfo erstellt
         switch (current){
             case ADD :
                 gameInfos=  getADD();
@@ -143,6 +139,7 @@ public class MGamescreen {
                 gameInfos =getDIV();
                 break;
 
+                //eventuell todo: redunanz einführen
             case MIX:
                 switch (ZufZaint(0,3)){//Zufälliger Spielmodus
                     case 0:
@@ -166,7 +163,7 @@ public class MGamescreen {
         }
     }
 
-   //Adition
+   //Addition
     private String[] getADD(){
 
         String paket[] = new String[5]; //Paket welches später übermittelt wird
@@ -257,6 +254,7 @@ public class MGamescreen {
 
 
 
+    //Zufällige Zahlen erstellen siehe Klasse eins
     private double ZufZa(double min, double max){
         return Math.random()*(max-min)+min;
     }//Zufällige Zahl

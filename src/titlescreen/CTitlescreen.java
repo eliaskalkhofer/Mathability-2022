@@ -40,11 +40,18 @@ public class CTitlescreen {
         stage.setScene(scene);
         stage.setTitle("Mathability");
         stage.show();
+
+        //model wird erstellt
         CTitlescreen cTitlescreen = loader.getController();
         cTitlescreen.model = new MTitlescreen(0, username);
+        //Liste wird mit Werten befüllt
         cTitlescreen.showlist();
-cTitlescreen.changeLabel();
-cTitlescreen.showlbuser();
+
+        //Überschrift wird geändert
+        cTitlescreen.changeLabel();
+
+        //welcher User aktuelle angemeldet ist
+        cTitlescreen.showlbuser();
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -56,33 +63,36 @@ cTitlescreen.showlbuser();
     public void btGamemode(ActionEvent actionEvent) {
       String choosenGamemode = ((Button)actionEvent.getSource()).getId();
       Gamemode zwisch = null;
+      //welcher Gamemode verwendet wird
         switch (choosenGamemode){
             case "ADD":
-                //Langer Code um die aktuelle Stage weiterzugeben
+
                 zwisch = Gamemode.ADD;
                 break;
             case "SUB":
-                //Langer Code um die aktuelle Stage weiterzugeben
+
                 zwisch = Gamemode.SUB;
                 break;
             case "MUL":
-                //Langer Code um die aktuelle Stage weiterzugeben
+
                 zwisch = Gamemode.MUL;
                 break;
             case "DIV":
-                //Langer Code um die aktuelle Stage weiterzugeben
+
                 zwisch = Gamemode.DIV;
                 break;
             case "MIX":
-                //Langer Code um die aktuelle Stage weiterzugeben
+
                zwisch = Gamemode.MIX;
                 break;
         }
+        //Übertragen werden die aktuelle Stage, der aktuelle Spielmodus und der Benutzername
         CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), zwisch, model.getUsername());
 
     }
 
     private void showlist(){
+        //Liste wird von Highscores geladen und in die Listview gestellt
         listview.setItems(FXCollections.observableList(Highscores.getInstance().getList(model.getActHighscoreMode())));
     }
 
@@ -100,13 +110,17 @@ cTitlescreen.showlbuser();
         }else {
             model.setActHighscoreInt(model.getActHighscoreInt()+1);
         }
-showlist();
+        //nächste Liste und nächste Überschrift wird angezeigt
+        showlist();
         changeLabel();
     }
+
+
     private void showlbuser(){
         lbuser.setText("angemeldet als: "+model.getUsername());
     }
 
+    //Abmeldung und zurück zum Login
     public void btlogout(ActionEvent actionEvent) {
         Clogin.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow());
     }

@@ -4,11 +4,15 @@ import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Highscores implements Serializable {
 
-    private static Highscores highscores;
+public class Highscores implements Serializable {
+    //Filepath
     private static final String FILEPATH = "scores.ser";
 
+    //Instanzieren
+    private static Highscores highscores;
+
+    //Highscorelisten
     private List<Score> addHS;
     private List<Score> subHS;
     private List<Score> mulHS;
@@ -16,6 +20,7 @@ public class Highscores implements Serializable {
     private List<Score> mixHS;
 
 
+    //klassich getInstance
     public static Highscores getInstance(){
         if(highscores ==null){
             highscores = new Highscores();
@@ -41,6 +46,7 @@ public class Highscores implements Serializable {
 
     }
 
+    //eine Score in die Liste aufnehmen
     public void addScore(Score score){
         switch (score.getType()){
             case ADD:
@@ -64,6 +70,7 @@ public class Highscores implements Serializable {
     }
 
 
+    //aus Datei laden
     public void restore() throws IOException, ClassNotFoundException {
         FileInputStream filein = new FileInputStream(FILEPATH);
         ObjectInputStream objectIn = new ObjectInputStream(filein);
@@ -72,6 +79,7 @@ public class Highscores implements Serializable {
         System.out.println("Erfolgreich wiederhergestellt");
 
     }
+    //in Datei laden
    public void store(){
         try {
 
@@ -85,6 +93,8 @@ public class Highscores implements Serializable {
             ex.printStackTrace();
         }
     }
+
+    //gewünschte Liste bekommen
     public List<Score> getList(Gamemode typ){
         switch (typ){
             case ADD:
@@ -106,6 +116,5 @@ public class Highscores implements Serializable {
         }
         return null;
     }
-
 
 }

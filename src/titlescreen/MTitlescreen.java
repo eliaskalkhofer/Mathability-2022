@@ -3,10 +3,10 @@ package titlescreen;
 import helper.Gamemode;
 
 public class MTitlescreen {
+    //In welcher Reihenfolge die Highscores angesehen werden können
     private final Gamemode order[] = {Gamemode.ADD, Gamemode.SUB, Gamemode.MUL, Gamemode.DIV, Gamemode.MIX};
     private int actHighscoreInt;
     private String username;
-
 
 
     public MTitlescreen(int actHighscoreInt, String username){
@@ -27,6 +27,7 @@ public class MTitlescreen {
         return actHighscoreInt;
     }
 
+    //Highscore ändern welcher Angzeigt werden soll
     public void setActHighscoreInt(int actHighscoreInt) {
         if(actHighscoreInt>4 ){
             actHighscoreInt=0;
@@ -37,11 +38,9 @@ public class MTitlescreen {
         this.actHighscoreInt = actHighscoreInt;
     }
 
+    //Integer wert welcher durch die Buttons erhöht wird zu einem Gamemode umwandeln
     public Gamemode getActHighscoreMode() {
         return order[actHighscoreInt];
     }
 
-    public void incremntacthighscoreint(){
-        actHighscoreInt++;
-    }
 }

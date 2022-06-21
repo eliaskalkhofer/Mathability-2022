@@ -48,10 +48,15 @@ public class CGamescreen {
             stage.show();
 
 
+            //Model erstellen
             CGamescreen cGamescreen = loader.getController();
             cGamescreen.model = new MGamescreen(mode, username);
             cGamescreen.stage = stage;
+
+            //Bindung einfügen
             cGamescreen.last();
+
+            //die erste Rechnung anzeigen
             cGamescreen.showRechnung();
         }catch (Exception ex){
             ex.printStackTrace();
@@ -59,11 +64,6 @@ public class CGamescreen {
 
     }//show
 
-
-    @FXML
-    public void initialize(){
-
-    }
 
    private void last(){
        pbtimeleft.progressProperty().bind(model.timeleftProperty());
@@ -119,10 +119,13 @@ public class CGamescreen {
     }//btoptionpressed
 
 
+    //Ergebnis war falsch
     private void end(String msg){
+        //neuer Score wird erstellt
         Score actscore = new Score(model.getScore(), model.getId(), model.getCurrent());
+        //und gespeichert
         ((Highscores)Highscores.getInstance()).addScore(actscore);
-
+        //Scorescreen wird angezeigt
         CScore.show(stage,actscore);
     }
 }

@@ -21,13 +21,13 @@ public class Clogin {
 
             //standard javafx
             FXMLLoader loader = new FXMLLoader(Clogin.class.getResource("Vlogin.fxml"));
-            //Modell erstellen und Gamemode auswählen
             Parent parent = loader.load();
-
             Scene scene = new Scene(parent);
             stage.setScene(scene);
             stage.setTitle("Mathability");
             stage.show();
+
+            //model erstellen
             Clogin clogin = loader.getController();
             clogin.model = new Mlogin();
             
@@ -36,9 +36,10 @@ public class Clogin {
         }
     }
     
-    
+    //login button gedrückt
     public void login(ActionEvent actionEvent) {
         model.setUsername(userinput.getText());
+        //Weiterleitung zur Titelseite      ((Node)actionEvent.... ist um die aktuelle Stage zu bekommen
         CTitlescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(),model.getUsername());
     }
 }
