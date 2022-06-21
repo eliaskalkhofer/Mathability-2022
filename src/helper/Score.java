@@ -51,5 +51,8 @@ public class Score implements Serializable {
     }
 
 
-
+    @Override
+    public String toString() {
+        return getName()+": "+getAmount();
+    }
 }
