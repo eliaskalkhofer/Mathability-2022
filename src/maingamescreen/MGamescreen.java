@@ -66,12 +66,13 @@ public class MGamescreen {
     }
 
 
-    public MGamescreen(Gamemode mode){
+    public MGamescreen(Gamemode mode, String username){
         setCurrent(mode);
         setScore(0);
+        setId(username);
         gametimer = new Timer();
         startTimer();
-        setId("DefaultUser");
+
     }
 
     //Getter und Setter

@@ -4,6 +4,7 @@ import helper.Gamemode;
 import helper.Highscores;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import login.Clogin;
 import maingamescreen.CGamescreen;
 import titlescreen.CTitlescreen;
 
@@ -16,7 +17,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Highscores.getInstance().restore();
-     CTitlescreen.show(primaryStage);
+        Clogin.show(primaryStage);
     }
 
     public void stop(){

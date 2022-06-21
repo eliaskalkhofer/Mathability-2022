@@ -54,6 +54,6 @@ public class CScore {
 
     public void exitOnAction(ActionEvent actionEvent) {
 
-        CTitlescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow());
+        CTitlescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), model.getScore().getName());
     }
 }

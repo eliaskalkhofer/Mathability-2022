@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import login.Clogin;
 import maingamescreen.CGamescreen;
 
 import java.io.IOException;
@@ -24,12 +25,13 @@ public class CTitlescreen {
     public ListView listview;
     public Button btright;
     public Label lbmode;
+    public Label lbuser;
 
 
     private MTitlescreen model;
     private CTitlescreen cTitlescreen;
 
-    public static void show(Stage stage) {
+    public static void show(Stage stage, String username) {
         try {
             //standard javafx
         FXMLLoader loader = new FXMLLoader(CTitlescreen.class.getResource("VTitlescreen.fxml"));
@@ -39,42 +41,45 @@ public class CTitlescreen {
         stage.setTitle("Mathability");
         stage.show();
         CTitlescreen cTitlescreen = loader.getController();
-        cTitlescreen.model = new MTitlescreen(0);
+        cTitlescreen.model = new MTitlescreen(0, username);
         cTitlescreen.showlist();
 cTitlescreen.changeLabel();
+cTitlescreen.showlbuser();
 
         }catch (Exception ex){
             ex.printStackTrace();
         }
     }
 
-//Kurzer Prototyp keineswegs fertig
 
     //Auswählen des Gamemodes
     public void btGamemode(ActionEvent actionEvent) {
       String choosenGamemode = ((Button)actionEvent.getSource()).getId();
+      Gamemode zwisch = null;
         switch (choosenGamemode){
             case "ADD":
                 //Langer Code um die aktuelle Stage weiterzugeben
-                CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), Gamemode.ADD);
+                zwisch = Gamemode.ADD;
                 break;
             case "SUB":
                 //Langer Code um die aktuelle Stage weiterzugeben
-                CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), Gamemode.SUB);
+                zwisch = Gamemode.SUB;
                 break;
             case "MUL":
                 //Langer Code um die aktuelle Stage weiterzugeben
-                CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), Gamemode.MUL);
+                zwisch = Gamemode.MUL;
                 break;
             case "DIV":
                 //Langer Code um die aktuelle Stage weiterzugeben
-                CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), Gamemode.DIV);
+                zwisch = Gamemode.DIV;
                 break;
             case "MIX":
                 //Langer Code um die aktuelle Stage weiterzugeben
-                CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), Gamemode.MIX);
+               zwisch = Gamemode.MIX;
                 break;
         }
+        CGamescreen.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow(), zwisch, model.getUsername());
+
     }
 
     private void showlist(){
@@ -97,5 +102,12 @@ cTitlescreen.changeLabel();
         }
 showlist();
         changeLabel();
+    }
+    private void showlbuser(){
+        lbuser.setText("angemeldet als: "+model.getUsername());
+    }
+
+    public void btlogout(ActionEvent actionEvent) {
+        Clogin.show((Stage) ((Node)actionEvent.getSource()).getScene().getWindow());
     }
 }

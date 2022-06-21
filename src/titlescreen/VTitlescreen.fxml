@@ -30,6 +30,8 @@
     </HBox>
     <Button onAction="#btGamemode" prefHeight="130.0" prefWidth="460.0" text="MIX" fx:id="MIX"/>
 
+    <Label fx:id="lbuser"/>
+    <Button fx:id="logout" onAction="#btlogout" text="logout"/>
 </VBox>
 
 <VBox>

@@ -34,7 +34,7 @@ public class CGamescreen {
 
 
     //start
-    public static void show(Stage stage, Gamemode mode) {
+    public static void show(Stage stage, Gamemode mode, String username) {
         try {
 
             //standard javafx
@@ -49,7 +49,7 @@ public class CGamescreen {
 
 
             CGamescreen cGamescreen = loader.getController();
-            cGamescreen.model = new MGamescreen(mode);
+            cGamescreen.model = new MGamescreen(mode, username);
             cGamescreen.stage = stage;
             cGamescreen.last();
             cGamescreen.showRechnung();
