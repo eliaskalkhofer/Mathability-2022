@@ -3,6 +3,7 @@ package maingamescreen;
 import helper.Gamemode;
 import helper.Highscores;
 import helper.Score;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -67,6 +68,14 @@ public class CGamescreen {
 
    private void last(){
        pbtimeleft.progressProperty().bind(model.timeleftProperty());
+       pbtimeleft.progressProperty().addListener((observable, oldValue, newValue) -> {
+           if (newValue.intValue()>=1){
+               model.stopTimer();
+               Platform.runLater(()->end("Leider ist die Zeit ausgelaufen!"));
+           }
+
+
+       });
    }
 
     private void showRechnung(){
@@ -93,14 +102,14 @@ public class CGamescreen {
             //Richtig
 
             System.out.println("  Und richtig gelöst");
-            model.setScore(model.getScore()+1);
+            model.incScore();//Score erhöhen
 
         }else {
            //versuch stoppen
 
             System.out.println(" Und falsch gelöst ");
             model.stopTimer();
-            end("Falsche Antwort");
+            end("Leider wurde die falsche Antwort gewählt");
 
         }
 
@@ -121,11 +130,14 @@ public class CGamescreen {
 
     //Ergebnis war falsch
     private void end(String msg){
+
+
         //neuer Score wird erstellt
+
         Score actscore = new Score(model.getScore(), model.getId(), model.getCurrent());
         //und gespeichert
         ((Highscores)Highscores.getInstance()).addScore(actscore);
         //Scorescreen wird angezeigt
-        CScore.show(stage,actscore);
+        CScore.show(stage,actscore, msg);
     }
 }

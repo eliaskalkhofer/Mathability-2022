@@ -17,9 +17,10 @@ import titlescreen.CTitlescreen;
 public class CScore {
     public Text txName;
     public Text txScore;
+    public Text txmsg;
     MScore model;
 
-    public static void show(Stage stage, Score score){
+    public static void show(Stage stage, Score score, String msg){
         try {
 
             //standard javafx
@@ -33,7 +34,7 @@ public class CScore {
 
             //model erstellen
             CScore cGamescreen = loader.getController();
-            cGamescreen.model = new MScore(score);
+            cGamescreen.model = new MScore(score, msg);
             cGamescreen.loadmodel();
         }catch (Exception ex){
             ex.printStackTrace();
@@ -45,6 +46,8 @@ public class CScore {
     public void loadmodel(){
         txName.setText("Benutzer: "+model.getScore().getName());
         txScore.setText("Score: "+model.getScore().getAmount()+" Punkte");
+        txmsg.setText(model.getMsg());
+
         
     }
 

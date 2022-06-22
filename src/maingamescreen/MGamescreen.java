@@ -21,10 +21,12 @@ public class MGamescreen {
 
 
     //Für den Timer
-    private static int ANSWERTIME = 10000; //in ms
-    private static int PROGRESSBARUPDATE = 10; //in ms
+    private static final double TIMEPERSCORE = 0.10; //bei jedem richtigen Score wird die aktuelle answertime um 10% reduziert.
+    private static final int ANSWERTIME = 10000; //in ms
+    private static final int PROGRESSBARUPDATE = 10; //in ms
     private  int timepassed=0;
     private DoubleProperty timeleft;
+    private int actmaxtime = ANSWERTIME;
 
 
     //Gametimer während des Spieles
@@ -36,12 +38,8 @@ public class MGamescreen {
 
 
             timepassed+=PROGRESSBARUPDATE;
-            timeleftProperty().set((timepassed+0.0) / ANSWERTIME);
+            timeleftProperty().set((timepassed+0.0) / actmaxtime);
 
-
-            if(timepassed>ANSWERTIME){
-                stopTimer();
-            }
         }
 
     };
@@ -53,7 +51,10 @@ public class MGamescreen {
     public void startTimer(){
         gametimer.schedule(task, PROGRESSBARUPDATE,10);
     }
-    public void stopTimer(){ gametimer.purge();}
+    public void stopTimer(){
+        gametimer.cancel();
+        gametimer.purge();
+    }
 
 
     //Für Binding
@@ -252,6 +253,11 @@ public class MGamescreen {
         return paket;
     }//getDiv
 
+
+    public void incScore(){
+        actmaxtime = (int)(actmaxtime *(1.0-TIMEPERSCORE));//geschwindigkeit erhöhen
+        score++;//score erhöhen
+    }
 
 
     //Zufällige Zahlen erstellen siehe Klasse eins

@@ -1,6 +1,8 @@
 package helper;
 
 import java.io.*;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class Highscores implements Serializable {
             restore();
         }catch (Exception ex){
             //Listen werden neu erstellt
+            System.out.println("Fehler beim Laden, neue Liste wird erstellt! ");
             addHS = new LinkedList();
             subHS = new LinkedList();
             divHS = new LinkedList();
@@ -51,19 +54,24 @@ public class Highscores implements Serializable {
         switch (score.getType()){
             case ADD:
                 addHS.add(score);
+                Collections.sort(addHS);
                 break;
             case MIX:
                 mixHS.add(score);
+                Collections.sort(mixHS);
                 break;
 
             case SUB:
                 subHS.add(score);
+                Collections.sort(subHS);
                 break;
             case MUL:
                 mulHS.add(score);
+                Collections.sort(mulHS);
                 break;
             case DIV:
                 divHS.add(score);
+                Collections.sort(divHS);
                 break;
 
         }

@@ -2,7 +2,7 @@ package helper;
 
 import java.io.Serializable;
 
-public class Score implements Serializable {
+public class Score implements Serializable, Comparable {
 
     private int amount;
     private Gamemode type;
@@ -57,4 +57,13 @@ public class Score implements Serializable {
     public String toString() {
         return getName()+": "+getAmount();
     }
+
+
+    @Override
+    public int compareTo(Object o) {
+        return((Score)o).getAmount()- this.getAmount();
+    }
+
+
+
 }
